@@ -143,7 +143,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ $authUser->image_path }}"
+                                                        <img src="{{ asset('assets/images/default-user.jpg')  }}"
                                                             alt="{{ $authUser->name }}" />
                                                     </a>
                                                 </div>
@@ -161,7 +161,7 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="{{ route('admin.logout') }}">
+                                                <a href="{{ route('logout') }}">
                                                     <i class="zmdi zmdi-power"></i>{{ trans('app.logout') }}</a>
                                             </div>
                                         </div>

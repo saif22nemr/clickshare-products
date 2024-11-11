@@ -49,34 +49,17 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        if (isUrlActive('admin')):
-            auth('web')->logout();
-        elseif (isUrlActive('manager')):
-            auth('web')->logout();
-        elseif (isUrlActive('employee')):
-            auth('web')->logout();
-        else:
-            auth('web')->logout();
-            auth('web')->logout();
-            auth('web')->logout();
-        endif;
+        auth('web')->logout();
         return redirect(route('login'));
     }
 
     public function loginAs($type)
     {
-        if ($type == 'admin'):
-            $admin = Admin::first();
-            auth('web')->login($admin);
-            return redirect(route('admin.home'));
-        elseif ($type == 'manager'):
-            $manager = Manager::first();
-            auth('web')->login($manager);
-            return redirect(route('manager.home'));
-        else:
-            $employee = Employee::first();
-            auth('web')->login($employee);
-            return redirect(route('employee.home'));
+        if(config('app.mode') != 'test'):
+            return redirect(route('login'));
         endif;
+        $admin = User::firstOrFail();
+        auth('web')->login($admin);
+        return redirect(route('admin.home'));
     }
 }

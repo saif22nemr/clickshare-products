@@ -105,6 +105,7 @@
                                     type="submit">{{ trans('app.sign_in') }}</button>
 
                             </form>
+                            @if(config('app.mode') == 'test')
                             <div class="login-as">
                                 <h4 class="text-center">{{ trans('app.login_as') }}</h4>
                                 <div class="buttons">
@@ -116,6 +117,8 @@
                                         class="btn btn-info">{{ trans('app.employee') }}</a>
                                 </div>
                             </div>
+                            @endif
+                            
 
                         </div>
                     </div>

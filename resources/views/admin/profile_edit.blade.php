@@ -70,19 +70,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">{{ trans('app.image') }}</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="file" id="" name="image" placeholder="{{ trans('app.image') }}"
-                                    class="form-control {{ getInputError('image', $errors) != null ? 'is-invalid' : '' }}"
-                                    accept="image/*">
-                                @error('image')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+
 
 
                     </form>

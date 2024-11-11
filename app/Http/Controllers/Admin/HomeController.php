@@ -39,7 +39,6 @@ class HomeController extends Controller
         // validate password
         if ($request->method() == 'POST'):
             $dd = $request->all();
-            $dd['image'] = $request->file('image');
             $req = new AdminProfileRequest( $dd);
             $data = $req->validate( $req->rules());
             if (!empty($request->password)):
@@ -54,7 +53,6 @@ class HomeController extends Controller
                 $data['password'] = $admin->password;
             endif;
             if ($request->hasFile('image')):
-                deleteUserImage($admin);
                 $data['image'] = Storage::disk('upload')->put('users', $request->file('image'));
             else:
                 $data['image'] = $admin->image;
