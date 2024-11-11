@@ -1,5 +1,5 @@
 @php
-    $authUser = auth('admin')->user();
+    $authUser = auth('web')->user();
 @endphp
 @include('admin.layout.header')
 
@@ -134,7 +134,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ $authUser->image_path }}" alt="{{ $authUser->name }}" />
+                                            <img src="{{ asset('assets/images/default-user.jpg') }}" alt="{{ $authUser->name }}" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{ $authUser->name }}</a>

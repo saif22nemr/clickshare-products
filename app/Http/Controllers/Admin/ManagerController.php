@@ -15,14 +15,14 @@ class ManagerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:web');
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $admin = auth('admin')->user();
+        $admin = auth('web')->user();
         $managers = Manager::with('departments')->withCount('employees')->orderByDesc('created_at')->get();
         return view('admin.managers.index', compact('managers'));
     }
@@ -54,7 +54,7 @@ class ManagerController extends Controller
         if (!empty($request->password)):
             $data['password'] = Hash::make($request->password);
         endif;
-        $user = auth('admin')->user();
+        $user = auth('web')->user();
         $data += [
             'type' => 'manager',
             'manager_id' => $user->id,
@@ -126,7 +126,7 @@ class ManagerController extends Controller
 
     public function loginAsManager(Manager $manager)
     {
-        auth('manager')->login($manager);
+        auth('web')->login($manager);
         return redirect(route('manager.home'));
     }
 

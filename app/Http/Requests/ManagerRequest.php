@@ -22,7 +22,7 @@ class ManagerRequest extends FormRequest
     public function rules(): array
     {
         $method = request()->method;
-        $employeeId = request('manager_id');
+        $employeeId = request('user_id');
         return [
             'first_name' => 'required|string|min:1|max:190',
             'last_name' => 'required|string|min:1|max:190',
@@ -35,9 +35,7 @@ class ManagerRequest extends FormRequest
 
             // 'salary' => 'required|integer|min:1',
             'password' => ($method == 'POST' ? 'required|' : 'nullable|') . 'min:6|string',
-            'departments' => 'nullable|array|min:1',
-            'departments.*' => 'nullable|integer|exists:departments,id',
-            'image' => 'nullable|file|mimes:png,jpg,jpeg,svg,gif',
+
         ];
     }
 }

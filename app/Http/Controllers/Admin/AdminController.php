@@ -8,6 +8,7 @@ use App\Http\Requests\ManagerRequest;
 use App\Models\Admin;
 use App\Models\Department;
 use App\Models\Manager;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
@@ -16,15 +17,15 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:web');
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $admin = auth('admin')->user();
-        $admins = Admin::orderByDesc('created_at')->where('id' , '!=' , $admin->id)->get();
+        $admin = auth('web')->user();
+        $admins = User::orderByDesc('created_at')->where('id' , '!=' , $admin->id)->get();
         return view('admin.admins.index', compact('admins'));
     }
 
@@ -50,16 +51,16 @@ class AdminController extends Controller
                 'password' => $passCheck
             ]);
         endif;
-        $data['image'] = $request->hasFile('image') ? Storage::disk('upload')->put('users', $request->file('image')) : null;
+
         if (!empty($request->password)):
             $data['password'] = Hash::make($request->password);
         endif;
-        $user = auth('admin')->user();
+        $user = auth('web')->user();
         $data += [
             'type' => 'admin',
             'manager_id' => $user->id,
         ];
-        $manager = Admin::create($data);
+        $manager = User::create($data);
         flash(trans('app.save_success'), 'success');
         return redirect(route('admin.admin.index'));
     }
@@ -69,7 +70,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admin $admin)
+    public function edit(User $admin)
     {
 
         return view('admin.admins.edit', compact( 'admin'));
@@ -78,7 +79,7 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ManagerRequest $request, Admin $admin)
+    public function update(ManagerRequest $request, User $admin)
     {
 
         // validate password
@@ -94,12 +95,6 @@ class AdminController extends Controller
         else:
             $data['password'] = $admin->password;
         endif;
-        if ($request->hasFile('image')):
-            deleteUserImage($admin);
-            $data['image'] = Storage::disk('upload')->put('users', $request->file('image'));
-        else:
-            $data['image'] = $admin->image;
-        endif;
 
         $admin->update($data);
         flash(trans('app.save_success'), 'success');
@@ -109,9 +104,8 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Admin $admin)
+    public function destroy(User $admin)
     {
-        deleteUserImage($admin);
         $admin->delete();
         return $this->successResponse(message: trans('app.delete_success'));
     }

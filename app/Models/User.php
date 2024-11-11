@@ -23,10 +23,7 @@ class User extends Authenticatable
         'password',
         'first_name',
         'last_name',
-        'salary',
-        'image',
-        'type', // enum [employee , manager , admin]
-        'manager_id',
+        'type', // enum [ admin]
     ];
 
     /**
@@ -45,24 +42,17 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
     public function getNameAttribute()
     {
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
-    public function getImagePathAttribute()
-    {
-        return empty($this->attributes['image']) ? asset('assets/images/default-user.jpg') : asset('uploads/' . $this->attributes['image']);
-    }
-    public function manager()
-    {
-        return $this->belongsTo(User::class, 'manager_id');
-    }
-
-    public function departments()
-    {
-        return $this->belongsToMany(Department::class, 'user_departments', 'user_id', 'department_id');
+    // public function getImagePathAttribute()
+    // {
+    //     return empty($this->attributes['image']) ? asset('assets/images/default-user.jpg') : asset('uploads/' . $this->attributes['image']);
+    // }
+    public function products(){
+        return $this->hasMany(Product::class , 'user_id');
     }
 }

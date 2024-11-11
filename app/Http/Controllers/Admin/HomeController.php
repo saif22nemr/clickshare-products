@@ -9,7 +9,9 @@ use App\Models\Admin;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Manager;
+use App\Models\Product;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -19,27 +21,21 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:web');
     }
     public function index()
     {
         $data = [
-            'employees_count' => Employee::whereNotNull('manager_id')->count(),
-            'managers_count' => Manager::count(),
-            'admins_count' => Admin::count(),
-            'departments_count' => Department::count(),
-            'tasks_count' => Task::count(),
-            'tasks_in_progress_count' => Task::where('status' , 'in_progress')->count(),
-            'tasks_complete_count' => Task::where('status' , 'complete')->count(),
-            'tasks_canceled_count' => Task::where('status' , 'canceled')->count(),
-            'salary' => Employee::sum('salary'),
+            'products_count' => Product::count() ,
+            'products_quantity' => Product::sum('quantity') ?? 0,
+            'admins_count' => User::count(),
         ];
         return view('admin.home'  , compact('data'));
     }
 
     public function profile(Request $request)
     {
-        $admin = auth('admin')->user();
+        $admin = auth('web')->user();
         // validate password
         if ($request->method() == 'POST'):
             $dd = $request->all();

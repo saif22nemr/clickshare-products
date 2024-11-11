@@ -92,41 +92,20 @@ if (!function_exists('isPasswordComplex')) {
 function getHomeUrl($user = null)
 {
     if (isset($user->id)):
-        if ($user->type == 'admin'):
-            return route('admin.home');
-        elseif ($user->type == 'manager'):
-            return route('manager.home');
-        elseif ($user->type == 'employee'):
-            return route('employee.home');
-        endif;
+       return route('admin.home');
     endif;
-    if (auth('admin')->check()):
+    if (auth('web')->check()):
         return route('admin.home');
-    elseif (auth('manager')->check()):
-        return route('manager.home');
-    elseif (auth('employee')->check()):
-        return route('employee.home');
     endif;
     return route('login');
 }
 
 function checkAuth()
 {
-    if (auth('admin')->check()):
-        return auth('admin')->user();
-    elseif (auth('manager')->check()):
-        return auth('manager')->user();
-    elseif (auth('employee')->check()):
-        return auth('employee')->user();
+    if (auth('web')->check()):
+        return auth('web')->user();
     endif;
     return null;
 }
-function deleteUserImage($user)
-{
-    if ($user->image != null and Storage::disk('upload')->exists($user->image_path)):
-        Storage::disk('upload')->delete($user->image_path);
-        return true;
-    endif;
-    return false;
-}
+
 

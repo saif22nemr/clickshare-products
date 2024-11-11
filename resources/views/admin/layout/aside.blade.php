@@ -17,14 +17,11 @@
                     <a href="{{ route('admin.admin.index') }}">
                         <i class="fas fa-chart-bar"></i>{{ trans('app.admins') }}</a>
                 </li>
-                <li class="{{ isUrlActive('admin/department') ? 'active' : '' }}">
-                    <a href="{{ route('admin.department.index') }}">
-                        <i class="fas fa-chart-bar"></i>{{ trans('app.departments') }}</a>
+                <li class="{{ isUrlActive('admin/product') ? 'active' : '' }}">
+                    <a href="{{ route('admin.product.index') }}">
+                        <i class="fas fa-chart-bar"></i>{{ trans('app.products') }}</a>
                 </li>
-                <li class="{{ isUrlActive('admin/manager') ? 'active' : '' }}">
-                    <a href="{{ route('admin.manager.index') }}">
-                        <i class="fas fa-chart-bar"></i>{{ trans('app.managers') }}</a>
-                </li>
+
 
             </ul>
         </nav>

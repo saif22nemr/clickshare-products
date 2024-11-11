@@ -28,13 +28,13 @@ class LoginController extends Controller
             // return $user->password;
             if (Hash::check($request->password, $user->password)):
                 if ($user->type == 'admin'):
-                    auth('admin')->login($user, $request->remember_me ?? false);
+                    auth('web')->login($user, $request->remember_me ?? false);
                     return redirect(route('admin.home'));
                 elseif ($user->type == 'manager'):
-                    auth('manager')->login($user, $request->remember_me ?? false);
+                    auth('web')->login($user, $request->remember_me ?? false);
                     return redirect(route('manager.home'));
                 elseif ($user->type == 'employee'):
-                    auth('employee')->login($user, $request->remember_me ?? false);
+                    auth('web')->login($user, $request->remember_me ?? false);
                     return redirect(route('employee.home'));
                 endif;
             else:
@@ -50,15 +50,15 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         if (isUrlActive('admin')):
-            auth('admin')->logout();
+            auth('web')->logout();
         elseif (isUrlActive('manager')):
-            auth('manager')->logout();
+            auth('web')->logout();
         elseif (isUrlActive('employee')):
-            auth('employee')->logout();
+            auth('web')->logout();
         else:
-            auth('admin')->logout();
-            auth('manager')->logout();
-            auth('employee')->logout();
+            auth('web')->logout();
+            auth('web')->logout();
+            auth('web')->logout();
         endif;
         return redirect(route('login'));
     }
@@ -67,15 +67,15 @@ class LoginController extends Controller
     {
         if ($type == 'admin'):
             $admin = Admin::first();
-            auth('admin')->login($admin);
+            auth('web')->login($admin);
             return redirect(route('admin.home'));
         elseif ($type == 'manager'):
             $manager = Manager::first();
-            auth('manager')->login($manager);
+            auth('web')->login($manager);
             return redirect(route('manager.home'));
         else:
             $employee = Employee::first();
-            auth('employee')->login($employee);
+            auth('web')->login($employee);
             return redirect(route('employee.home'));
         endif;
     }

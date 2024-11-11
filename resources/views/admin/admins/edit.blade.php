@@ -12,7 +12,7 @@
                         class="form-horizontal" id="storeForm">
                         @method('PUT')
                         @csrf
-                        <input type="hidden" name="manager_id" value="{{$admin->id}}">
+                        <input type="hidden" name="user_id" value="{{$admin->id}}">
                         <div class="row form-group">
                             <div class="col col-md-3">
                                 <label for="text-input" class=" form-control-label">{{ trans('app.first_name') }}</label>
@@ -68,29 +68,17 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">{{ trans('app.image') }}</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="file" id="" name="image"
-                                    placeholder="{{ trans('app.image') }}"
-                                    class="form-control {{ getInputError('image', $errors) != null ? 'is-invalid' : '' }}" accept="image/*">
-                                @error('image')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+                 
 
 
                     </form>
                 </div>
                 <div class="card-footer">
                     <button type="submit" form="storeForm" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> Submit
+                        <i class="fa fa-dot-circle-o"></i> {{trans('app.submit')}}
                     </button>
                     <button type="reset" form="storeForm" class="btn btn-danger btn-sm">
-                        <i class="fa fa-ban"></i> Reset
+                        <i class="fa fa-ban"></i> {{trans('app.reset')}}
                     </button>
                 </div>
             </div>

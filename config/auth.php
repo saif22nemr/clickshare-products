@@ -36,22 +36,12 @@ return [
     */
 
     'guards' => [
-        'employee' => [
-            'driver' => 'session',
-            'provider' => 'employee',
-        ],
+
         'web' => [
             'driver' => 'session',
-            'provider' => 'employee',
+            'provider' => 'users',
         ],
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admin',
-        ],
-        'manager' => [
-            'driver' => 'session',
-            'provider' => 'manager',
-        ],
+
     ],
 
     /*
@@ -75,18 +65,6 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-        ],
-        'admin' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
-        'manager' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Manager::class,
-        ],
-        'employee' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Employee::class,
         ],
 
         // 'users' => [

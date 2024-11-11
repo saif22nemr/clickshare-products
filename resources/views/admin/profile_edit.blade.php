@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            
+
             <div class="card">
                 <div class="card-header">
                     <strong>{{ trans('app.edit') }} {{ trans('app.profile') }}</strong>
@@ -89,10 +89,10 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" form="storeForm" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> Submit
+                        <i class="fa fa-dot-circle-o"></i> {{trans('app.submit')}}
                     </button>
                     <button type="reset" form="storeForm" class="btn btn-danger btn-sm">
-                        <i class="fa fa-ban"></i> Reset
+                        <i class="fa fa-ban"></i> {{trans('app.reset')}}
                     </button>
                 </div>
             </div>
