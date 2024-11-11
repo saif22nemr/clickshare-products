@@ -111,14 +111,10 @@
                                 <div class="buttons">
                                     <a href="{{ route('loginAs', 'admin') }}"
                                         class="btn btn-danger">{{ trans('app.admin') }}</a>
-                                    <a href="{{ route('loginAs', 'manager') }}"
-                                        class="btn btn-primary">{{ trans('app.manager') }}</a>
-                                    <a href="{{ route('loginAs', 'employee') }}"
-                                        class="btn btn-info">{{ trans('app.employee') }}</a>
                                 </div>
                             </div>
                             @endif
-                            
+
 
                         </div>
                     </div>

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="overview-wrap">
-                    <h2 class="title-1">{{ trans('app.overview') }}</h2>
+                    <h2 class="title-1">{{ trans('app.overview') }} , Hi {{auth('web')->user()->first_name}}</h2>
 
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-        
+
         </div>
     </div>
 @endsection
